@@ -1,0 +1,46 @@
+{
+  "name": "word-to-html-saas",
+  "version": "1.0.0",
+  "description": "Microsaas para conversão de conteúdo Word para HTML limpo",
+  "private": true,
+  "scripts": {
+    "setup": "npm run docker:check && npm run supabase:setup && npm run frontend:setup",
+    "dev": "concurrently \"npm run supabase:dev\" \"npm run frontend:dev\"",
+    "frontend:dev": "cd frontend && npm run dev",
+    "frontend:setup": "cd frontend && npm install",
+    "frontend:build": "cd frontend && npm run build",
+    "supabase:setup": "supabase start && supabase db reset",
+    "supabase:start": "supabase start",
+    "supabase:stop": "supabase stop",
+    "supabase:dev": "supabase start",
+    "supabase:functions:serve": "supabase functions serve",
+    "supabase:functions:deploy": "supabase functions deploy",
+    "supabase:db:reset": "supabase db reset",
+    "docker:check": "docker --version || echo 'Docker not found. Please install Docker Desktop'",
+    "test:frontend": "cd frontend && npm run test",
+    "test:api": "curl -X POST http://localhost:54321/functions/v1/convert-word -H 'Content-Type: application/json' -d '{\"content\":\"<p class=\\\"MsoNormal\\\">Test</p>\",\"options\":{\"cleanupLevel\":\"moderate\"},\"apiKey\":\"wth_demo_key_for_testing_only\"}'",
+    "clean": "npm run supabase:stop && cd frontend && rm -rf .next node_modules && npm install"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/word-to-html-saas.git"
+  },
+  "keywords": [
+    "word-to-html",
+    "html-cleaner",
+    "saas",
+    "api",
+    "supabase",
+    "nextjs"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+} 
