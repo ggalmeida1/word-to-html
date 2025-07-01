@@ -19,7 +19,11 @@ Um microsaas para conversão de conteúdo do Microsoft Word para HTML limpo e ot
 - **Styling**: Tailwind CSS
 - **Deploy**: Vercel (Frontend) + Supabase (Backend)
 
-## 📦 Instalação
+## 🌐 Quick Deploy to Vercel
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/your-username/word-to-html-saas&project-name=word-to-html-saas&repository-name=word-to-html-saas&root-directory=frontend&env=NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_ANON_KEY,NEXT_PUBLIC_API_BASE_URL)
+
+## 📦 Local Installation
 
 ### Pré-requisitos
 
@@ -74,6 +78,42 @@ supabase functions deploy convert-word
 supabase functions deploy generate-api-key
 ```
 
+## 🚀 Vercel Deployment
+
+### Method 1: One-Click Deploy
+
+1. Click the "Deploy with Vercel" button above
+2. Connect your GitHub account
+3. Set environment variables:
+   - `NEXT_PUBLIC_SUPABASE_URL`: Your Supabase project URL
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`: Your Supabase anon key
+   - `NEXT_PUBLIC_API_BASE_URL`: Your Supabase functions URL
+4. Deploy!
+
+### Method 2: Manual Deploy
+
+1. **Fork this repository**
+
+2. **Connect to Vercel:**
+   ```bash
+   npm i -g vercel
+   vercel login
+   vercel --cwd frontend
+   ```
+
+3. **Set Environment Variables in Vercel Dashboard:**
+   ```
+   NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
+   NEXT_PUBLIC_API_BASE_URL=https://your-project.supabase.co/functions/v1
+   NEXT_PUBLIC_APP_URL=https://your-domain.vercel.app
+   ```
+
+4. **Deploy:**
+   ```bash
+   vercel --prod --cwd frontend
+   ```
+
 ## 🔧 Configuração Local
 
 ### Supabase Local Development
@@ -100,7 +140,7 @@ supabase db reset
 ### Gerar API Key
 
 ```bash
-curl -X POST http://localhost:54321/functions/v1/generate-api-key \
+curl -X POST https://your-project.supabase.co/functions/v1/generate-api-key \
   -H "Content-Type: application/json" \
   -d '{
     "email": "seu@email.com",
@@ -111,7 +151,7 @@ curl -X POST http://localhost:54321/functions/v1/generate-api-key \
 ### Converter HTML
 
 ```bash
-curl -X POST http://localhost:54321/functions/v1/convert-word \
+curl -X POST https://your-project.supabase.co/functions/v1/convert-word \
   -H "Content-Type: application/json" \
   -d '{
     "content": "<p class=\"MsoNormal\">Texto do Word</p>",
@@ -134,29 +174,29 @@ curl -X POST http://localhost:54321/functions/v1/convert-word \
 | Pro | 10.000 | $29/mês |
 | Enterprise | Custom | Custom |
 
-## 🚀 Deploy
+## 🏗️ Arquitetura
 
-### Frontend (Vercel)
-
-1. Conecte seu repositório no Vercel
-2. Configure as variáveis de ambiente
-3. Deploy automático a cada push
-
-### Backend (Supabase)
-
-```bash
-# Login no Supabase
-supabase login
-
-# Link com seu projeto
-supabase link --project-ref your-project-ref
-
-# Deploy das functions
-supabase functions deploy
-
-# Deploy das migrações
-supabase db push
 ```
+┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
+│   Vercel        │    │    Supabase      │    │   PostgreSQL    │
+│   (Frontend)    │───▶│  (Edge Functions)│───▶│   (Database)    │
+│   Next.js       │    │   Deno/TypeScript│    │   Users/Stats   │
+└─────────────────┘    └──────────────────┘    └─────────────────┘
+```
+
+## 🔥 Performance
+
+- **Frontend**: Static generation + ISR
+- **API**: Edge functions worldwide
+- **Database**: Optimized queries with indexes
+- **CDN**: Vercel Edge Network
+
+## 📈 Scaling
+
+- **Vercel Pro**: Para aplicações de alto tráfego
+- **Supabase Pro**: Para mais recursos de banco
+- **Custom domains**: Configure seu próprio domínio
+- **Analytics**: Built-in Vercel Analytics
 
 ## 📖 Estrutura do Projeto
 
@@ -170,6 +210,10 @@ word-to-html-saas/
 │   ├── migrations/                # Migrações do banco
 │   └── config.toml               # Configuração do Supabase
 ├── frontend/                     # Aplicação Next.js
+│   ├── app/                      # App Router (Next.js 14)
+│   ├── components/               # Componentes React
+│   └── lib/                      # Utilitários e configurações
+├── vercel.json                   # Configuração Vercel
 └── README.md
 ```
 
@@ -199,6 +243,11 @@ Este projeto está sob a licença MIT. Veja o arquivo LICENSE para mais detalhes
 
 ## 🆘 Suporte
 
-- Documentação: http://localhost:3000/docs
-- Issues: GitHub Issues
-- Email: support@wordtohtml.dev 
+- 📚 Documentação: [Deployment Guide](./DEPLOYMENT.md)
+- 🐛 Issues: GitHub Issues
+- 💬 Discord: [Join our community](#)
+- 📧 Email: support@wordtohtml.dev
+
+## 🌟 Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=your-username/word-to-html-saas&type=Date)](https://star-history.com/#your-username/word-to-html-saas&Date) 
